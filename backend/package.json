@@ -1,0 +1,9 @@
+{
+  "name": "realstate-backend-scripts",
+  "private": true,
+  "type": "module",
+  "description": "One-off scripts to apply SQL to the Supabase project",
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}

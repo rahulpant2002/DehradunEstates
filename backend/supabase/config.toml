@@ -1,0 +1,7 @@
+# Supabase CLI project config.
+# Replace project_id with your project ref (Project Settings → General).
+project_id = "your-project-ref"
+
+[db]
+# Local dev database major version. Match your hosted project (Supabase is 15).
+major_version = 15
