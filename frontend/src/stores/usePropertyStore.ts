@@ -49,6 +49,7 @@ interface PropertyState {
   fetchMyInterests: () => Promise<Property[]>;
   fetchListingInterests: () => Promise<Interest[]>;
   fetchMyListings: () => Promise<Property[]>;
+  queryProperties: (filters?: PropertyFilters, limit?: number) => Promise<Property[]>;
 }
 
 export const usePropertyStore = create<PropertyState>((set) => ({
@@ -206,6 +207,26 @@ export const usePropertyStore = create<PropertyState>((set) => ({
       .select(SELECT)
       .eq('created_by', user.id)
       .order('created_at', { ascending: false });
+    if (error) throw error;
+    return (data || []).map(mapRow);
+  },
+
+  // Read-only search that returns results WITHOUT mutating store state
+  // (used by the chatbot so it doesn't disturb the Search/Home pages).
+  queryProperties: async (filters = {}, limit = 6) => {
+    let query = supabase
+      .from('properties')
+      .select(SELECT)
+      .order('created_at', { ascending: false })
+      .limit(limit);
+    if (filters.search) query = query.ilike('title', `%${filters.search}%`);
+    if (filters.property_type) query = query.eq('property_type', filters.property_type);
+    if (filters.price_type) query = query.eq('price_type', filters.price_type);
+    if (filters.min_price !== undefined) query = query.gte('price', filters.min_price);
+    if (filters.max_price !== undefined) query = query.lte('price', filters.max_price);
+    if (filters.bedrooms) query = query.gte('bedrooms', filters.bedrooms);
+    if (filters.furnishing) query = query.eq('furnishing', filters.furnishing);
+    const { data, error } = await query;
     if (error) throw error;
     return (data || []).map(mapRow);
   },

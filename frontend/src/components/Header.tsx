@@ -3,6 +3,7 @@ import { Sun, Moon, Menu, X, Building2, LogOut, ShoppingBag, Tag, Plus } from 'l
 import { useThemeStore } from '../stores/useThemeStore';
 import { useAuthStore } from '../stores/useAuthStore';
 import { useState } from 'react';
+import NotificationBell from './NotificationBell';
 
 export default function Header() {
   const { theme, toggle } = useThemeStore();
@@ -33,6 +34,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden md:flex items-center gap-2">
+          {user && <NotificationBell />}
           <button type="button" onClick={toggle} className="btn-ghost p-2 rounded-full" aria-label="Toggle theme">
             {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
@@ -49,9 +51,12 @@ export default function Header() {
           )}
         </div>
 
-        <button type="button" onClick={() => setMenuOpen(!menuOpen)} className="md:hidden btn-ghost p-2">
-          {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        <div className="md:hidden flex items-center gap-1">
+          {user && <NotificationBell />}
+          <button type="button" onClick={() => setMenuOpen(!menuOpen)} className="btn-ghost p-2">
+            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
       {menuOpen && (

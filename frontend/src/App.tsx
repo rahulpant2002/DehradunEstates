@@ -4,6 +4,7 @@ import { useThemeStore } from './stores/useThemeStore';
 import { useAuthStore } from './stores/useAuthStore';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ChatBot from './components/ChatBot';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import PropertiesPage from './pages/PropertiesPage';
@@ -47,6 +48,7 @@ export default function App() {
           </Routes>
         </main>
         <Footer />
+        <ChatBot />
       </div>
     </BrowserRouter>
   );
