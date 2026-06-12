@@ -33,6 +33,7 @@ interested buyer's contact details.
 ```
 RealState/
 ├── README.md              ← you are here (project overview + setup)
+├── docs/                  ← full project documentation (SRS, architecture, DB, dev log)
 ├── backend/               ← Supabase backend (SQL only — no server)
 │   ├── README.md          ← schema, RLS, storage, setup details
 │   └── supabase/
@@ -73,6 +74,10 @@ npm run dev
 ```
 Open the printed URL (default http://localhost:5173).
 More in **[frontend/README.md](frontend/README.md)**.
+
+### 📚 Full documentation
+Detailed docs live in **[docs/](docs/)**:
+[SRS](docs/01-SRS.md) · [Architecture](docs/02-ARCHITECTURE.md) · [Database](docs/03-DATABASE.md) · [Development Log](docs/04-DEVELOPMENT-LOG.md)
 
 > ⚠️ **The single most important gotcha:** the Supabase **project** referenced in
 > `frontend/.env` must be the **same project** where you ran the SQL. Mixing up two
